@@ -6,7 +6,7 @@ from time import sleep
 import time
 import tkinter
 import os
-
+import json
 
 camera = PiCamera()
 
@@ -19,33 +19,33 @@ left_motors = [front_kit.motor3, middle_kit.motor3,rear_kit.motor3]
 
 max_speed = 0.90
 
-device_key = os.environ['HOLOGRAM_DEVICE_KEY']
+device_key = ""
+with open('/home/pi/.hologram.json') as json_file:
+    device_key = json.load(json_file)['device_key']
+
 hologram = HologramCloud({'devicekey': device_key}, network='cellular')
-result = hologram.network.connect()
-if result == False:
-  print(' Failed to connect to cell network')
 
 commands = []
 
 def run_command():
-  print("running command")
-  received_commands = hologram.popReceivedMessage()
-  commands.extend(received_commands.split())
-  enter_pressed()
+    print("running command")
+    received_commands = hologram.popReceivedMessage()
+    commands.extend(received_commands.split())
+    enter_pressed()
 
-hologram.event.subscribe('message.received', run_command) 
+hologram.event.subscribe('message.received', run_command)
 
 def set_side_speed(side, speed):
     set_speed=speed
     motors=right_motors
-    
+
     if side=='left':
         set_speed=-speed
         motors=left_motors
 
     for motor in motors:
         motor.throttle=set_speed
-    
+
 def forward():
     set_side_speed("left", max_speed)
     set_side_speed("right", max_speed)
@@ -86,7 +86,7 @@ def forward_pressed():
 
 def reverse_pressed():
     commands.append("reverse")
-    
+
 def left_pressed():
     commands.append("left")
 
@@ -108,7 +108,7 @@ def enter_pressed():
         if command=="right" or command=='r':
             right()
         if  command=="picture" or command=='p':
-            picture()  
+            picture()
     commands.clear()
 
 window = tkinter.Tk()
