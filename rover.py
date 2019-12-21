@@ -23,6 +23,8 @@ device_key = ""
 with open('/home/pi/.hologram.json') as json_file:
     device_key = json.load(json_file)['device_key']
 
+print("init with device key")
+print(device_key)
 hologram = HologramCloud({'devicekey': device_key}, network='cellular')
 
 commands = []
