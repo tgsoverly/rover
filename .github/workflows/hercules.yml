@@ -1,0 +1,12 @@
+name: Hercules Insights
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Hercules Insights
+      uses: src-d/hercules@v10.7.2
