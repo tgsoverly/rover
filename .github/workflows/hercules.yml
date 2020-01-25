@@ -8,5 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Hercules Insights
-      uses: src-d/hercules@v10.7.2
+      - name: Clone Repo
+        uses: actions/checkout@master
+      - name: Hercules Insights
+        uses: src-d/hercules@v10.7.2
