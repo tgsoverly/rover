@@ -1,0 +1,14 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tests
+        uses: actions/checkout@v1
+      - name: Tests
+        uses: fylein/python-pytest-github-action@v1
+        with:
+          args: pip3 install pipenv && pipenv install && pipenv run pytest
