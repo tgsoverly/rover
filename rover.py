@@ -1,6 +1,5 @@
 from adafruit_motorkit import MotorKit
 from picamera import PiCamera
-from Hologram.HologramCloud import HologramCloud
 
 from time import sleep
 import time
@@ -19,23 +18,7 @@ left_motors = [front_kit.motor3, middle_kit.motor3,rear_kit.motor3]
 
 max_speed = 0.90
 
-device_key = ""
-with open('/home/pi/.hologram.json') as json_file:
-    device_key = json.load(json_file)['device_key']
-
-print("init with device key")
-print(device_key)
-hologram = HologramCloud({'devicekey': device_key}, network='cellular')
-
 commands = []
-
-def run_command():
-    print("running command")
-    received_commands = hologram.popReceivedMessage()
-    commands.extend(received_commands.split())
-    enter_pressed()
-
-hologram.event.subscribe('message.received', run_command)
 
 def set_side_speed(side, speed):
     set_speed=speed
