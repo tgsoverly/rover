@@ -3,4 +3,4 @@
 cd "$(dirname "$0")"
 git fetch
 git reset --hard origin/master
-pipenv run python3 rover.py
+pipenv run python rover.py
