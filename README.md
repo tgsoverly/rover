@@ -1,5 +1,7 @@
 # rover
 
+This is a learning repository for my son and our project to create a 3D printed rover
+
 ## Hologram How To:
 
 https://www.hackster.io/hologram/hologram-python-sdk-receiving-data-bccf4c
